@@ -1,26 +1,3 @@
-# version: 0.2
-
-# env:
-#   variables:
-#     IMAGE_TAG: "latest"
-#     IMAGE_REPO_NAME: "ecr_kiran_docker"
-#     AWS_ACCOUNT_ID: "240418355038"
-
-
-# phases:
-#   install:
-#       commands:
-#         - export PATH=$PATH:$(pwd)/codebuild
-#         - install.sh
-#   build:
-#     commands:
-#       - docker build -t $IMAGE_REPO_NAME .
-#       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-#       - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-
-      
-
-
 version: 0.2
 
 phases:
