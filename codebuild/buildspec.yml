@@ -1,0 +1,53 @@
+# version: 0.2
+
+# env:
+#   variables:
+#     IMAGE_TAG: "latest"
+#     IMAGE_REPO_NAME: "ecr_kiran_docker"
+#     AWS_ACCOUNT_ID: "240418355038"
+
+
+# phases:
+#   install:
+#       commands:
+#         - export PATH=$PATH:$(pwd)/codebuild
+#         - install.sh
+#   build:
+#     commands:
+#       - docker build -t $IMAGE_REPO_NAME .
+#       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+#       - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+
+      
+
+
+version: 0.2
+
+phases:
+  install:
+    commands:
+     # variables
+      - REPOSITORY_URI=240418355038.dkr.ecr.us-east-1.amazonaws.com/ecr_kiran_docker
+      - IMAGE_TAG=latest
+      - TAG_NAME=$REPOSITORY_URI:$IMAGE_TAG
+      - echo $REPOSITORY_URI
+      - echo $TAG_NAME  
+
+  pre_build:
+    commands:
+
+  build:
+    commands:
+      - echo Building the Docker image...  
+      - docker build -f codebuild/Dockerfile -t $TAG_NAME .
+      - docker tag $TAG_NAME $TAG_NAME
+  post_build:
+    commands:
+       - $(aws ecr get-login --no-include-email --region us-east-1)
+       - echo Build completed on `date`
+       - echo Pushing the Docker images...
+       - docker push $TAG_NAME
+
+artifacts:
+     files:
+      - imagedefinitions.json  

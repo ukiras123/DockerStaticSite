@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# exit immediately if there are any errors
+set -e
+
+# Stuff required for CodeBuild to send messages to Slack.
+# Install other packages here if they are required.
+sudo apt-get install -y curl wget
+wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+sudo mv jq-linux64 codebuild/jq && chmod +x codebuild/jq

@@ -1,0 +1,6 @@
+[
+    {
+        "name": "kiran-personal",
+        "imageUri": "240418355038.dkr.ecr.us-east-1.amazonaws.com/ecr_kiran_docker:lates"
+    }
+]
